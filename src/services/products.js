@@ -53,9 +53,11 @@ export default class ProductsService {
       const { email } = jwt.verify(token, secret, {
         ignoreExpiration: true,
       });
-      const { owner } = await productsRepository.getProduct(id);
+      const { owner, status } = await productsRepository.getProduct(id);
       if (owner !== email || owner !== AdminMail)
         throw new Error("Error, cannot update products you dont own");
+
+      update.stock > 0 ? (update.status = true) : (update.status = false);
 
       const result = await productsRepository.updateProduct(id, update);
       return result;
