@@ -5,5 +5,6 @@ export default class ProductDto {
     this.price = product.price;
     this.quantity = order.quantity;
     this.total = product.price * order.quantity;
+    this.thumbnail = product.thumbnail;
   }
 }
